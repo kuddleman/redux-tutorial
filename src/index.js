@@ -10,10 +10,10 @@ const productsReducer = ( state = [], action ) => {
    return state
 }
 
-const userReducer = ( state = '', action ) => {
-  switch ( action.type ) {
+const userReducer = ( state = '', { type, payload} ) => {
+  switch ( type ) {
     case 'updateUser':
-      return action.payload
+      return payload
   }
   return state
 }
@@ -34,16 +34,7 @@ const store = createStore(
       window.devToolsExtension()
   )
 
-console.log( store.getState())
 
-const updateUserAction = {
-  type: 'updateUser',
-  payload: {
-    user: 'John'
-  }
-}
-
-store.dispatch( updateUserAction )
 
 
 ReactDOM.render(
