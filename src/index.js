@@ -11,6 +11,10 @@ const productsReducer = ( state = [], action ) => {
 }
 
 const userReducer = ( state = '', action ) => {
+  switch ( action.type ) {
+    case 'updateUser':
+      return action.payload
+  }
   return state
 }
 
@@ -20,10 +24,26 @@ const allReducers = combineReducers({
   user: userReducer
 })
 
-
-const store = createStore( reducer )
+//create store and prepopulate state:
+const store = createStore( 
+    allReducers, {
+      products: [{ name: 'iPhone' }],
+      user: 'Michael'
+    },
+    window.devToolsExtension && 
+      window.devToolsExtension()
+  )
 
 console.log( store.getState())
+
+const updateUserAction = {
+  type: 'updateUser',
+  payload: {
+    user: 'John'
+  }
+}
+
+store.dispatch( updateUserAction )
 
 
 ReactDOM.render(
