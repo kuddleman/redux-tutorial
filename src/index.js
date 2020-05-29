@@ -5,18 +5,14 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { combineReducers, createStore } from 'redux'
 
+//provider gives app access to store
+import { Provider } from 'react-redux'
+import productsReducer from './reducers/products-reducer'
+import userReducer from './reducers/user-reducer'
 
-const productsReducer = ( state = [], action ) => {
-   return state
-}
 
-const userReducer = ( state = '', { type, payload} ) => {
-  switch ( type ) {
-    case 'updateUser':
-      return payload
-  }
-  return state
-}
+
+
 
 //combine productsReducer and userReducer:
 const allReducers = combineReducers({
@@ -35,11 +31,11 @@ const store = createStore(
   )
 
 
-
+//The Provider gives the App access to the store.
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={ store }><App /></Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
