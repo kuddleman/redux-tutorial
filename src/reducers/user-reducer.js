@@ -1,9 +1,13 @@
+import { UPDATE_USER } from '../actions/'
+
+
 const userReducer = ( state = '', { type, payload} ) => {
   switch ( type ) {
-    case 'updateUser':
+    case UPDATE_USER:
       return payload
+    default:
+      return state  
   }
-  return state
 }
 
 export default userReducer
